@@ -45,7 +45,7 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
     ChatHandler(player->GetSession()).SendSysMessage(Acore::StringFormat("Rolled {}", roll));
     if (roll > 50.0)
     {
-        SetSuffix(item, 441101);
+        SetSuffix(item, 100);
         //item->SetItemRandomProperties(-441101);
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
     }
