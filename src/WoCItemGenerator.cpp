@@ -56,7 +56,7 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
     for (uint32 i = PROP_ENCHANTMENT_SLOT_0; i < MAX_ENCHANTMENT_SLOT; ++i)
     {
         uint32 enchantId = item->GetEnchantmentId(EnchantmentSlot(i));
-        ChatHandler(player->GetSession()).SendSysMessage(Acore::StringFormat("Enchant: %s", enchantId));
+        LOG_INFO("module", "EnchantId({}): {}", i, enchantId);
     }
 }
 
