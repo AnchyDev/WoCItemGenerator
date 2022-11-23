@@ -46,15 +46,18 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
     }
 
     double roll = rand_chance();
-    ChatHandler(player->GetSession()).SendSysMessage(Acore::StringFormat("Rolled {}", roll));
+    ChatHandler(player->GetSession()).SendSysMessage(Acore::StringFormat("Rolled"));
     if (roll > 50.0)
     {
         SetSuffix(item, 100, player);
-        //item->SetItemRandomProperties(-441101);
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
     }
 
-	ChatHandler(player->GetSession()).SendSysMessage("Stored New Item.");
+    for (uint32 i = PROP_ENCHANTMENT_SLOT_0; i < MAX_ENCHANTMENT_SLOT; ++i)
+    {
+        uint32 enchantId = item->GetEnchantmentId(EnchantmentSlot(i));
+        ChatHandler(player->GetSession()).SendSysMessage(Acore::StringFormat("Enchant: %s", enchantId));
+    }
 }
 
 void AddWoCItemGeneratorScripts()
