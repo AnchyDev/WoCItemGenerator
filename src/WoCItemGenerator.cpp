@@ -5,7 +5,7 @@ bool WoCPlayer::IsWoCItem(const ItemTemplate* itemTemplate)
     return (itemTemplate->FlagsCu & WOC_FLAGS_ITEM) == WOC_FLAGS_ITEM;
 }
 
-void SetSuffix(Item* item, int32 randomPropId, Player* player)
+void SetSuffix(Item* item, int32 randomPropId)
 {
     ItemRandomSuffixEntry const* item_rand = sItemRandomSuffixStore.LookupEntry(randomPropId);
 
@@ -47,7 +47,7 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
     ChatHandler(player->GetSession()).SendSysMessage(Acore::StringFormat("Rolled"));
     if (roll > 50.0)
     {
-        SetSuffix(item, 100, player);
+        SetSuffix(item, 100);
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
     }
 
@@ -56,9 +56,16 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
         uint32 enchantId = item->GetEnchantmentId(EnchantmentSlot(i));
         LOG_INFO("module", "EnchantId({}): {}", i, enchantId);
 
-        
-        enchantId = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BODY)->GetEnchantmentId(EnchantmentSlot(i));
-        LOG_INFO("module", "EquipEnchantId({}): {}", i, enchantId);
+
+        for (int i = EQUIPMENT_SLOT_START; i < EQUIPMENT_SLOT_END; ++i)
+        {
+            if (i == EQUIPMENT_SLOT_BODY)
+            {
+                Item* chestItem = player->GetItemByPos(i);
+                enchantId = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BODY)->GetEnchantmentId(EnchantmentSlot(i));
+                LOG_INFO("module", "EquipEnchantId({}): {}", i, enchantId);
+            }
+        }
     }
 }
 
