@@ -14,8 +14,10 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
         return;
     }
 
-    if(rand_chance() > 50)
+    if (rand_chance() > 50)
+    {
         item->SetItemRandomProperties(-441101);
+    }
 
 	ChatHandler(player->GetSession()).SendSysMessage("Stored New Item.");
 }
