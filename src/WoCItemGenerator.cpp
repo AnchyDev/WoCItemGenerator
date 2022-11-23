@@ -5,7 +5,7 @@ bool WoCPlayer::IsWoCItem(const ItemTemplate* itemTemplate)
     return (itemTemplate->FlagsCu & WOC_FLAGS_ITEM) == WOC_FLAGS_ITEM;
 }
 
-void SetSuffix(Item* item, int32 randomPropId)
+void SetSuffix(Item* item, int32 randomPropId, Player* player)
 {
     ItemRandomSuffixEntry const* item_rand = sItemRandomSuffixStore.LookupEntry(randomPropId);
 
@@ -29,7 +29,11 @@ void SetSuffix(Item* item, int32 randomPropId)
     }
 
     for (uint32 i = PROP_ENCHANTMENT_SLOT_0; i < MAX_ENCHANTMENT_SLOT; ++i)
+    {
+        player->ApplyEnchantment(item, false);
         item->SetEnchantment(EnchantmentSlot(i), item_rand->Enchantment[i - PROP_ENCHANTMENT_SLOT_0], 0, 0);
+        player->ApplyEnchantment(item, true);
+    }
 }
 
 void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
@@ -45,7 +49,7 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
     ChatHandler(player->GetSession()).SendSysMessage(Acore::StringFormat("Rolled {}", roll));
     if (roll > 50.0)
     {
-        SetSuffix(item, 100);
+        SetSuffix(item, 100, player);
         //item->SetItemRandomProperties(-441101);
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
     }
