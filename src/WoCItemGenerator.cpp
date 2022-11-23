@@ -14,9 +14,12 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
         return;
     }
 
-    if (rand_chance() > 50)
+    double roll = rand_chance();
+    ChatHandler(player->GetSession()).SendSysMessage(Acore::StringFormat("Rolled {}", roll));
+    if (roll > 50.0)
     {
         item->SetItemRandomProperties(-441101);
+        ChatHandler(player->GetSession()).SendSysMessage("Won roll");
     }
 
 	ChatHandler(player->GetSession()).SendSysMessage("Stored New Item.");
