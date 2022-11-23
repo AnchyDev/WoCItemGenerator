@@ -15,10 +15,10 @@ void SetSuffix(Item* item, int32 randomPropId)
         return;
     }
 
-    if (item->GetInt32Value(ITEM_FIELD_RANDOM_PROPERTIES_ID) != int32(item_rand->ID) ||
+    if (item->GetInt32Value(ITEM_FIELD_RANDOM_PROPERTIES_ID) != -int32(item_rand->ID) ||
         !item->GetItemSuffixFactor())
     {
-        item->SetInt32Value(ITEM_FIELD_RANDOM_PROPERTIES_ID, int32(item_rand->ID));
+        item->SetInt32Value(ITEM_FIELD_RANDOM_PROPERTIES_ID, -int32(item_rand->ID));
         item->UpdateItemSuffixFactor();
         item->SetState(ITEM_CHANGED, item->GetOwner());
     }
