@@ -34,6 +34,24 @@ void SetSuffix(Item* item, int32 randomPropId)
     }
 }
 
+void WoCPlayer::OnEquip(Player* /*player*/, Item* item, uint8 /*bag*/, uint8 /*slot*/, bool /*update*/)
+{
+    auto itemTemplate = item->GetTemplate();
+
+    if (!IsWoCItem(itemTemplate))
+    {
+        return;
+    }
+
+    LOG_INFO("module", "RandomSuffixId {}", item->GetItemRandomPropertyId());
+
+    for (uint32 i = PROP_ENCHANTMENT_SLOT_0; i < MAX_ENCHANTMENT_SLOT; ++i)
+    {
+        uint32 enchant = item->GetEnchantmentId(EnchantmentSlot(i));
+        LOG_INFO("module", "Enchant({}) {}", i, enchant);
+    }
+}
+
 void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
 {
     auto itemTemplate = item->GetTemplate();

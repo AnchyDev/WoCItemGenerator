@@ -24,6 +24,7 @@ private:
     };
     bool IsWoCItem(const ItemTemplate* /*itemTemplate*/);
     void OnStoreNewItem(Player* /*player*/, Item* /*item*/, uint32 /*count*/) override;
+    void OnEquip(Player* /*player*/, Item* /*item*/, uint8 /*bag*/, uint8 /*slot*/, bool /*update*/) override;
 };
 
 #endif
