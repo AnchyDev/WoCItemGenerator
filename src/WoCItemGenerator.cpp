@@ -128,6 +128,14 @@ void WoCPlayer::OnEquip(Player* /*player*/, Item* item, uint8 /*bag*/, uint8 /*s
         return;
     }
 
+    //No needs to recalc the factor
+    if (item->GetItemSuffixFactor() != 0)
+    {
+        return;
+    }
+
+    UpdateItemSuffixFactor(item);
+
     LOG_INFO("module", "RandomSuffixId {} : Factor: {}", item->GetItemRandomPropertyId(), item->GetItemSuffixFactor());
 
     for (uint32 i = PROP_ENCHANTMENT_SLOT_0; i < MAX_ENCHANTMENT_SLOT; ++i)
