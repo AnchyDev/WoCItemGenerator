@@ -49,23 +49,8 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
     {
         SetSuffix(item, 100);
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
-    }
 
-    for (uint32 i = PROP_ENCHANTMENT_SLOT_0; i < MAX_ENCHANTMENT_SLOT; ++i)
-    {
-        uint32 enchantId = item->GetEnchantmentId(EnchantmentSlot(i));
-        LOG_INFO("module", "EnchantId({}): {}", i, enchantId);
-
-
-        for (int i = EQUIPMENT_SLOT_START; i < EQUIPMENT_SLOT_END; ++i)
-        {
-            if (i == EQUIPMENT_SLOT_BODY)
-            {
-                Item* chestItem = player->GetItemByPos(i);
-                enchantId = chestItem->GetEnchantmentId(EnchantmentSlot(i));
-                LOG_INFO("module", "EquipEnchantId({}): {}", i, enchantId);
-            }
-        }
+        LOG_INFO("module", "RandomSuffixId {}", item->GetItemRandomPropertyId());
     }
 }
 
