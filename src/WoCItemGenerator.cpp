@@ -62,7 +62,7 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
             if (i == EQUIPMENT_SLOT_BODY)
             {
                 Item* chestItem = player->GetItemByPos(i);
-                enchantId = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BODY)->GetEnchantmentId(EnchantmentSlot(i));
+                enchantId = chestItem->GetEnchantmentId(EnchantmentSlot(i));
                 LOG_INFO("module", "EquipEnchantId({}): {}", i, enchantId);
             }
         }
