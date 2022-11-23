@@ -30,9 +30,7 @@ void SetSuffix(Item* item, int32 randomPropId, Player* player)
 
     for (uint32 i = PROP_ENCHANTMENT_SLOT_0; i < MAX_ENCHANTMENT_SLOT; ++i)
     {
-        player->ApplyEnchantment(item, false);
         item->SetEnchantment(EnchantmentSlot(i), item_rand->Enchantment[i - PROP_ENCHANTMENT_SLOT_0], 0, 0);
-        player->ApplyEnchantment(item, true);
     }
 }
 
