@@ -5,7 +5,7 @@ bool WoCPlayer::IsWoCItem(const ItemTemplate* itemTemplate)
     return (itemTemplate->FlagsCu & WOC_FLAGS_ITEM) == WOC_FLAGS_ITEM;
 }
 
-uint32 GenerateEnchSuffixFactor(uint32 item_id)
+uint32 GenerateEnchSuffixFactorFixed(uint32 item_id)
 {
     ItemTemplate const* itemProto = sObjectMgr->GetItemTemplate(item_id);
 
@@ -84,7 +84,7 @@ uint32 GenerateEnchSuffixFactor(uint32 item_id)
 
 void UpdateItemSuffixFactor(Item* item)
 {
-    uint32 suffixFactor = GenerateEnchSuffixFactor(item->GetEntry());
+    uint32 suffixFactor = GenerateEnchSuffixFactorFixed(item->GetEntry());
     if (item->GetItemSuffixFactor() == suffixFactor)
         return;
     item->SetUInt32Value(ITEM_FIELD_PROPERTY_SEED, suffixFactor);
