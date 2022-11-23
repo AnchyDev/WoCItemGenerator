@@ -15,14 +15,9 @@ public:
 class WoCPlayer : public PlayerScript
 {
 public:
-    WoCPlayer() : PlayerScript("WoCPlayer")
-    {
-        currentId = 410001;
-    }
+    WoCPlayer() : PlayerScript("WoCPlayer") { }
 
 private:
-    uint32 currentId;
-
     enum WoCFlags
     {
         WOC_FLAGS_ITEM = 16
