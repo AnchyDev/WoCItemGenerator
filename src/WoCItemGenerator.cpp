@@ -175,6 +175,11 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
         SetSuffix(item, 100);
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
 
+        SpellItemEnchantmentEntry const* pPrismaticEnchant = sSpellItemEnchantmentStore.LookupEntry(item->GetEnchantmentId(PRISMATIC_ENCHANTMENT_SLOT));
+        player->ApplyEnchantment(item, false);
+        item->SetEnchantment(PRISMATIC_ENCHANTMENT_SLOT, pPrismaticEnchant->ID, 0, 0);
+        player->ApplyEnchantment(item, true);
+
         LOG_INFO("module", "RandomSuffixId {}", item->GetItemRandomPropertyId());
     }
 }
