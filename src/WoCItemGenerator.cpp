@@ -180,6 +180,8 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
         SetSuffix(item, 100);
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
 
+        EnchantItem(player, item, PRISMATIC_ENCHANTMENT_SLOT, 3884, true);
+
         LOG_INFO("module", "RandomSuffixId {}", item->GetItemRandomPropertyId());
     }
 }
