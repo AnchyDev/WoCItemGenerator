@@ -175,8 +175,6 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
         SetSuffix(item, 100);
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
 
-        item->GetMutableTemplate()->Socket[0].Color = SOCKET_COLOR_RED;
-
         LOG_INFO("module", "RandomSuffixId {}", item->GetItemRandomPropertyId());
     }
 }
