@@ -5,6 +5,20 @@ bool WoCPlayer::IsWoCItem(const ItemTemplate* itemTemplate)
     return (itemTemplate->FlagsCu & WOC_FLAGS_ITEM) == WOC_FLAGS_ITEM;
 }
 
+void EnchantItem(Player* player, Item* item, EnchantmentSlot slot, uint32 enchantId, bool overwrite)
+{
+    if (item->GetEnchantmentId(slot) && !overwrite)
+    {
+        return;
+    }
+
+    player->ApplyEnchantment(item, false);
+    item->SetEnchantment(EnchantmentSlot(slot), enchantId, 0, 0);
+    player->ApplyEnchantment(item, true);
+
+    return;
+}
+
 uint32 GenerateEnchSuffixFactorFixed(uint32 item_id)
 {
     ItemTemplate const* itemProto = sObjectMgr->GetItemTemplate(item_id);
@@ -160,6 +174,9 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
     {
         SetSuffix(item, 100);
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
+
+        EnchantItem(player, item, SOCK_ENCHANTMENT_SLOT, 3729, true); //Sock 1
+        EnchantItem(player, item, SOCK_ENCHANTMENT_SLOT_2, 3729, true); //Sock 2
 
         LOG_INFO("module", "RandomSuffixId {}", item->GetItemRandomPropertyId());
     }
