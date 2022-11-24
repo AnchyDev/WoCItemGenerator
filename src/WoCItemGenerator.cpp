@@ -137,6 +137,11 @@ void WoCPlayer::OnEquip(Player* /*player*/, Item* item, uint8 /*bag*/, uint8 /*s
 {
     auto itemTemplate = item->GetTemplate();
 
+    LOG_INFO("module", "{} {} {} {}", item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT),
+        item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT_2),
+        item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT_3),
+        item->GetEnchantmentId(PRISMATIC_ENCHANTMENT_SLOT));
+
     if (!IsWoCItem(itemTemplate))
     {
         return;
@@ -174,11 +179,6 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
     {
         SetSuffix(item, 100);
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
-
-        SpellItemEnchantmentEntry const* pPrismaticEnchant = sSpellItemEnchantmentStore.LookupEntry(item->GetEnchantmentId(PRISMATIC_ENCHANTMENT_SLOT));
-        player->ApplyEnchantment(item, false);
-        item->SetEnchantment(PRISMATIC_ENCHANTMENT_SLOT, pPrismaticEnchant->ID, 0, 0);
-        player->ApplyEnchantment(item, true);
 
         LOG_INFO("module", "RandomSuffixId {}", item->GetItemRandomPropertyId());
     }
