@@ -20,9 +20,12 @@ public:
 private:
     enum WoCFlags
     {
-        WOC_FLAGS_ITEM = 16
+        WOC_FLAGS_ITEM = 16,
+        WOC_FLAGS_ITEM_PHYS = 32,
+        WOC_FLAGS_ITEM_SPELL = 64,
+        WOC_FLAGS_ITEM_TANK = 128
     };
-    bool IsWoCItem(const ItemTemplate* /*itemTemplate*/);
+    bool HasWoCFlag(WoCFlags /*flag*/, const ItemTemplate* /*itemTemplate*/);
     void OnStoreNewItem(Player* /*player*/, Item* /*item*/, uint32 /*count*/) override;
     void OnEquip(Player* /*player*/, Item* /*item*/, uint8 /*bag*/, uint8 /*slot*/, bool /*update*/) override;
 };

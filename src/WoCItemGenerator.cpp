@@ -1,8 +1,8 @@
 #include "WoCItemGenerator.h"
 
-bool WoCPlayer::IsWoCItem(const ItemTemplate* itemTemplate)
+bool WoCPlayer::HasWoCFlag(WoCFlags flag, const ItemTemplate* itemTemplate)
 {
-    return (itemTemplate->FlagsCu & WOC_FLAGS_ITEM) == WOC_FLAGS_ITEM;
+    return (itemTemplate->FlagsCu & flag) == flag;
 }
 
 void EnchantItem(Player* player, Item* item, EnchantmentSlot slot, uint32 enchantId, bool overwrite)
@@ -142,7 +142,8 @@ void WoCPlayer::OnEquip(Player* /*player*/, Item* item, uint8 /*bag*/, uint8 /*s
         item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT_3),
         item->GetEnchantmentId(PRISMATIC_ENCHANTMENT_SLOT));
 
-    if (!IsWoCItem(itemTemplate))
+    //Not a WoC item
+    if (!HasWoCFlag(WOC_FLAGS_ITEM, itemTemplate))
     {
         return;
     }
@@ -168,7 +169,7 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
 {
     auto itemTemplate = item->GetTemplate();
 
-    if (!IsWoCItem(itemTemplate))
+    if (!HasWoCFlag(WOC_FLAGS_ITEM, itemTemplate))
     {
         return;
     }
@@ -177,12 +178,19 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
     ChatHandler(player->GetSession()).SendSysMessage(Acore::StringFormat("Rolled"));
     if (roll > 50.0)
     {
-        SetSuffix(item, 100);
+
+        if (HasWoCFlag(WoCFlags::WOC_FLAGS_ITEM_PHYS, itemTemplate))
+        {
+            SetSuffix(item, 100);
+        }
+        else if (HasWoCFlag(WoCFlags::WOC_FLAGS_ITEM_SPELL, itemTemplate))
+        {
+            SetSuffix(item, 101);
+        }
+        
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
 
-        EnchantItem(player, item, SOCK_ENCHANTMENT_SLOT, 3884, true);
-        EnchantItem(player, item, BONUS_ENCHANTMENT_SLOT, 3884, true);
-        EnchantItem(player, item, PRISMATIC_ENCHANTMENT_SLOT, 3884, true);
+        //EnchantItem(player, item, PRISMATIC_ENCHANTMENT_SLOT, 3884, true);
 
         LOG_INFO("module", "RandomSuffixId {}", item->GetItemRandomPropertyId());
     }
