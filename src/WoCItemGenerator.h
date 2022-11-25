@@ -6,12 +6,6 @@
 #include "Config.h"
 #include "Chat.h"
 
-class WoCItem : public ItemTemplate
-{
-public:
-    WoCItem(ItemTemplate const* base) : ItemTemplate(*base) { }
-};
-
 class WoCPlayer : public PlayerScript
 {
 public:
