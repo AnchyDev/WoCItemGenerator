@@ -181,7 +181,7 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
 
         if (HasWoCFlag(WoCFlags::WOC_FLAGS_ITEM_PHYS, itemTemplate))
         {
-            SetSuffix(item, 100);
+            SetSuffix(item, 102);
         }
         else if (HasWoCFlag(WoCFlags::WOC_FLAGS_ITEM_SPELL, itemTemplate))
         {
