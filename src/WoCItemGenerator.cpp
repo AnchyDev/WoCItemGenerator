@@ -81,6 +81,7 @@ uint32 GenerateEnchSuffixFactorFixed(uint32 item_id)
     // Select rare/epic modifier
     switch (itemProto->Quality)
     {
+    case ITEM_QUALITY_NORMAL:
     case ITEM_QUALITY_UNCOMMON:
         return randomProperty->UncommonPropertiesPoints[suffixFactor];
     case ITEM_QUALITY_RARE:
