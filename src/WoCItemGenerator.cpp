@@ -182,11 +182,7 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
 
         if (HasWoCFlag(WoCFlags::WOC_FLAGS_ITEM_PHYS, itemTemplate))
         {
-            SetSuffix(item, 102);
-        }
-        else if (HasWoCFlag(WoCFlags::WOC_FLAGS_ITEM_SPELL, itemTemplate))
-        {
-            SetSuffix(item, 101);
+            SetSuffix(item, urand(100, 108));
         }
         
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
