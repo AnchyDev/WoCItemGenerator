@@ -48,7 +48,7 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
 
         if (itemTemplate->HasWoCFlag(WOC_FLAGS_ITEM_PHYS))
         {
-            item->SetItemRandomProperties(urand(100, 108));
+            item->SetItemRandomProperties(-urand(100, 108));
         }
         
         ChatHandler(player->GetSession()).SendSysMessage("Won roll");
