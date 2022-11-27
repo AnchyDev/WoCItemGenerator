@@ -16,8 +16,6 @@ void EnchantItem(Player* player, Item* item, EnchantmentSlot slot, uint32 enchan
 
 void WoCPlayer::OnEquip(Player* /*player*/, Item* item, uint8 /*bag*/, uint8 /*slot*/, bool /*update*/)
 {
-    auto itemTemplate = item->GetTemplate();
-
     LOG_INFO("module", "{} {} {} {}", item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT),
         item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT_2),
         item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT_3),
