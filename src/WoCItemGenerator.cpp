@@ -16,18 +16,18 @@ void EnchantItem(Player* player, Item* item, EnchantmentSlot slot, uint32 enchan
 
 void WoCPlayer::OnEquip(Player* /*player*/, Item* item, uint8 /*bag*/, uint8 /*slot*/, bool /*update*/)
 {
-    LOG_INFO("module", "{} {} {} {}", item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT),
-        item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT_2),
-        item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT_3),
-        item->GetEnchantmentId(PRISMATIC_ENCHANTMENT_SLOT));
-
-    LOG_INFO("module", "RandomSuffixId {} : Factor: {}", item->GetItemRandomPropertyId(), item->GetItemSuffixFactor());
-
-    for (uint32 i = PROP_ENCHANTMENT_SLOT_0; i < MAX_ENCHANTMENT_SLOT; ++i)
-    {
-        uint32 enchant = item->GetEnchantmentId(EnchantmentSlot(i));
-        LOG_INFO("module", "Enchant({}) {}", i, enchant);
-    }
+    //LOG_INFO("module", "{} {} {} {}", item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT),
+    //    item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT_2),
+    //    item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT_3),
+    //    item->GetEnchantmentId(PRISMATIC_ENCHANTMENT_SLOT));
+    //
+    //LOG_INFO("module", "RandomSuffixId {} : Factor: {}", item->GetItemRandomPropertyId(), item->GetItemSuffixFactor());
+    //
+    //for (uint32 i = PROP_ENCHANTMENT_SLOT_0; i < MAX_ENCHANTMENT_SLOT; ++i)
+    //{
+    //    uint32 enchant = item->GetEnchantmentId(EnchantmentSlot(i));
+    //    LOG_INFO("module", "Enchant({}) {}", i, enchant);
+    //}
 
     //int32 propId = item->GetItemRandomPropertyId();
     //item->SetItemRandomProperties(propId < 0 ? propId - 1 : propId + 1);
@@ -57,7 +57,7 @@ void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
 
         //EnchantItem(player, item, PRISMATIC_ENCHANTMENT_SLOT, 3884, true);
 
-        LOG_INFO("module", "RandomSuffixId {}", item->GetItemRandomPropertyId());
+        //LOG_INFO("module", "RandomSuffixId {}", item->GetItemRandomPropertyId());
     }
 }
 
