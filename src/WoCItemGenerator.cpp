@@ -14,7 +14,7 @@ void EnchantItem(Player* player, Item* item, EnchantmentSlot slot, uint32 enchan
     return;
 }
 
-void WoCPlayer::OnEquip(Player* player, Item* item, uint8 /*bag*/, uint8 /*slot*/, bool /*update*/)
+void WoCPlayer::OnEquip(Player* /*player*/, Item* item, uint8 /*bag*/, uint8 /*slot*/, bool /*update*/)
 {
     LOG_INFO("module", "{} {} {} {}", item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT),
         item->GetEnchantmentId(SOCK_ENCHANTMENT_SLOT_2),
@@ -29,9 +29,9 @@ void WoCPlayer::OnEquip(Player* player, Item* item, uint8 /*bag*/, uint8 /*slot*
         LOG_INFO("module", "Enchant({}) {}", i, enchant);
     }
 
-    int32 propId = item->GetItemRandomPropertyId();
-    item->SetItemRandomProperties(propId < 0 ? propId - 1 : propId + 1);
-    player->UpdateAllStats();
+    //int32 propId = item->GetItemRandomPropertyId();
+    //item->SetItemRandomProperties(propId < 0 ? propId - 1 : propId + 1);
+    //player->UpdateAllStats();
 }
 
 void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
