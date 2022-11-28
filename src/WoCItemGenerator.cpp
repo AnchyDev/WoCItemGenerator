@@ -28,6 +28,9 @@ void WoCPlayer::OnEquip(Player* /*player*/, Item* item, uint8 /*bag*/, uint8 /*s
         uint32 enchant = item->GetEnchantmentId(EnchantmentSlot(i));
         LOG_INFO("module", "Enchant({}) {}", i, enchant);
     }
+
+    int32 propId = item->GetItemRandomPropertyId();
+    item->SetItemRandomProperties(propId < 0 ? propId - 1 : propId + 1);
 }
 
 void WoCPlayer::OnStoreNewItem(Player* player, Item* item, uint32 /*count*/)
